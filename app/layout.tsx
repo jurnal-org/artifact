@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
+import { Providers } from "@/components/providers";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -29,7 +30,7 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${libreBaskerville.variable} font-sans bg-background text-foreground antialiased`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
