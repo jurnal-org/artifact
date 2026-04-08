@@ -18,7 +18,7 @@ export async function chatWithGemini(
 ): Promise<string> {
   const ai = getGemini();
   const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash-preview-04-17",
+    model: "gemini-3-flash-preview",
     contents: messages.map((m) => ({
       role: m.role,
       parts: [{ text: m.content }],
@@ -39,7 +39,7 @@ export async function generateClosure(
 ): Promise<string> {
   const ai = getGemini();
   const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash-preview-04-17",
+    model: "gemini-3-flash-preview",
     contents: [{ role: "user", parts: [{ text: transcript }] }],
     config: {
       systemInstruction: systemPrompt,

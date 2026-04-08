@@ -3,7 +3,7 @@ import { getGemini } from "./gemini";
 export async function embedText(text: string): Promise<number[]> {
   const ai = getGemini();
   const result = await ai.models.embedContent({
-    model: "gemini-embedding-exp-03-07",
+    model: "gemini-embedding-2-preview",
     contents: text,
     config: {
       outputDimensionality: 768,
