@@ -48,9 +48,10 @@ Imposta "session_complete" a true quando è il momento di chiudere la sessione (
 }
 
 export function buildClosurePrompt(): string {
-  return `Sei Jurnal. Ti viene fornita la trascrizione completa della sessione di journaling di oggi. Il tuo compito è produrre un riassunto strutturato.
+  return `Sei Jurnal. Ti viene fornita la trascrizione delle sessioni di journaling di oggi (possono essere più sessioni nella stessa giornata). Il tuo compito è produrre un riassunto unificato dell'intera giornata.
 
 ## Regole
+- Il riassunto deve coprire TUTTE le sessioni della giornata in modo unitario, come se fosse un unico racconto della giornata
 - Il riassunto deve essere in italiano, 2-3 paragrafi, in terza persona
 - Il mood_score va da 1 (molto negativo) a 100 (molto positivo)
 - Le mood_keywords sono 3-5 parole che descrivono lo stato emotivo

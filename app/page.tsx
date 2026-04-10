@@ -8,8 +8,6 @@ import { BottomNav } from "@/components/bottom-nav";
 import { MoodScore } from "@/components/mood-score";
 import { MoodPills } from "@/components/mood-pills";
 import { VoiceRecorder } from "@/components/voice-recorder";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import type { Session as JurnalSession } from "@/lib/types";
 
 export default function Home() {
@@ -51,46 +49,33 @@ export default function Home() {
     if (data.session) router.push("/session");
   };
 
-  // Session already completed today
-  if (todaySession?.summary) {
-    return (
-      <main className="relative min-h-dvh pb-20">
-        <AuroraBackground />
-        <div className="relative z-10 mx-auto max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-10 sm:pt-12">
-          <p className="mb-1 text-sm text-teal-dim">{greeting()}, {userName}</p>
-          <h1 className="mb-6 sm:mb-8 font-serif text-2xl sm:text-3xl text-foreground">La tua giornata</h1>
-          <div className="mb-6 text-center">
-            <MoodScore score={todaySession.mood_score!} size="lg" />
-            <p className="mt-1 text-xs text-muted-foreground">mood di oggi</p>
-            <div className="mt-3 flex justify-center">
-              <MoodPills keywords={todaySession.mood_keywords} />
-            </div>
-          </div>
-          <div className="rounded-2xl border border-card-border bg-card p-4 sm:p-5">
-            <p className="font-serif text-sm leading-relaxed text-muted">{todaySession.summary}</p>
-          </div>
-          <Button
-            variant="outline"
-            className="mt-6 w-full border-card-border bg-card text-foreground hover:bg-white/5"
-            onClick={handleStartSession}
-          >
-            <Plus className="mr-2 h-4 w-4" />
-            Nuova sessione
-          </Button>
-        </div>
-        <BottomNav />
-      </main>
-    );
-  }
-
-  // No session yet
   return (
     <main className="relative min-h-dvh pb-20">
       <AuroraBackground />
-      <div className="relative z-10 mx-auto flex min-h-dvh max-w-md sm:max-w-lg md:max-w-xl flex-col items-center justify-center px-4 sm:px-6">
+      <div className="relative z-10 mx-auto max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-10 sm:pt-12">
         <p className="mb-1 text-sm text-teal-dim">{greeting()}, {userName}</p>
-        <h1 className="mb-10 sm:mb-12 font-serif text-2xl sm:text-3xl text-foreground">Come ti senti stasera?</h1>
-        <VoiceRecorder isRecording={false} onStart={handleStartSession} onStop={() => {}} />
+        <h1 className="mb-6 sm:mb-8 font-serif text-2xl sm:text-3xl text-foreground">
+          {todaySession?.summary ? "La tua giornata" : "Come ti senti stasera?"}
+        </h1>
+
+        {todaySession?.summary && (
+          <>
+            <div className="mb-6 text-center">
+              <MoodScore score={todaySession.mood_score!} size="lg" />
+              <p className="mt-1 text-xs text-muted-foreground">mood di oggi</p>
+              <div className="mt-3 flex justify-center">
+                <MoodPills keywords={todaySession.mood_keywords} />
+              </div>
+            </div>
+            <div className="mb-8 rounded-2xl border border-card-border bg-card p-4 sm:p-5">
+              <p className="font-serif text-sm leading-relaxed text-muted">{todaySession.summary}</p>
+            </div>
+          </>
+        )}
+
+        <div className="flex flex-col items-center">
+          <VoiceRecorder isRecording={false} onStart={handleStartSession} onStop={() => {}} />
+        </div>
       </div>
       <BottomNav />
     </main>

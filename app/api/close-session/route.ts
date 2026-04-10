@@ -19,7 +19,25 @@ export async function POST(req: Request) {
     .map((m) => `${m.role === "user" ? "Utente" : "Jurnal"}: ${m.content}`)
     .join("\n\n");
 
-  const closureText = await generateClosure(buildClosurePrompt(), transcript);
+  // Fetch previous completed sessions from today to build a unified daily summary
+  const previousSessions = await sql`
+    SELECT transcript, summary, mood_score, mood_keywords
+    FROM sessions
+    WHERE user_id = ${userId} AND date = CURRENT_DATE AND id != ${session_id} AND summary IS NOT NULL
+    ORDER BY created_at ASC
+  `;
+
+  let fullContext = "";
+  if (previousSessions.length > 0) {
+    const prevTranscripts = previousSessions
+      .map((s, i) => `--- Sessione ${i + 1} ---\n${s.transcript}`)
+      .join("\n\n");
+    fullContext = `${prevTranscripts}\n\n--- Sessione corrente ---\n${transcript}`;
+  } else {
+    fullContext = transcript;
+  }
+
+  const closureText = await generateClosure(buildClosurePrompt(), fullContext);
 
   let closure: SessionClosure;
   try {
