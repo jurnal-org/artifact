@@ -19,8 +19,8 @@ CREATE TABLE sessions (
   mood_score INTEGER CHECK (mood_score >= 1 AND mood_score <= 100),
   mood_keywords TEXT[] DEFAULT '{}',
   embedding vector(768),
-  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-  UNIQUE(user_id, date)
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+  -- NOTE: UNIQUE(user_id, date) removed in 002 to allow multiple sessions per day
 );
 
 -- Fact types enum

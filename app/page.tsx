@@ -50,7 +50,11 @@ export default function Home() {
     try {
       const res = await fetch("/api/sessions", { method: "POST" });
       const data = await res.json();
-      if (data.session) router.push("/session");
+      if (data.session) {
+        router.push("/session");
+      } else {
+        setStarting(false);
+      }
     } catch {
       setStarting(false);
     }
