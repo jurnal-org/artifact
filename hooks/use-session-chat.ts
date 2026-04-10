@@ -6,7 +6,6 @@ interface UseSessionChatReturn {
   messages: Pick<Message, "role" | "content">[];
   isLoading: boolean;
   isComplete: boolean;
-  questionCount: number;
   sendMessage: (content: string) => Promise<void>;
   closeSession: () => Promise<{ summary: string; mood_score: number; mood_keywords: string[] } | null>;
 }
@@ -15,8 +14,6 @@ export function useSessionChat(sessionId: string | null, briefing: SessionBriefi
   const [messages, setMessages] = useState<Pick<Message, "role" | "content">[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
-  const [questionCount, setQuestionCount] = useState(0);
-
   const sendMessage = useCallback(async (content: string) => {
     if (!sessionId || !briefing || isComplete) return;
     setMessages((prev) => [...prev, { role: "user", content }]);
@@ -29,7 +26,6 @@ export function useSessionChat(sessionId: string | null, briefing: SessionBriefi
       });
       const data: AiResponse = await res.json();
       setMessages((prev) => [...prev, { role: "assistant", content: data.message }]);
-      setQuestionCount((c) => c + 1);
       if (data.session_complete) setIsComplete(true);
     } catch (error) {
       console.error("Failed to send message:", error);
@@ -53,5 +49,5 @@ export function useSessionChat(sessionId: string | null, briefing: SessionBriefi
     }
   }, [sessionId]);
 
-  return { messages, isLoading, isComplete, questionCount, sendMessage, closeSession };
+  return { messages, isLoading, isComplete, sendMessage, closeSession };
 }

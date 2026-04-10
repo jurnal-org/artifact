@@ -6,7 +6,6 @@ import { useEffect, useState, useRef } from "react";
 import { AuroraBackground } from "@/components/aurora-background";
 import { ChatBubble } from "@/components/chat-bubble";
 import { VoiceRecorder } from "@/components/voice-recorder";
-import { ProgressDots } from "@/components/progress-dots";
 import { MoodScore } from "@/components/mood-score";
 import { MoodPills } from "@/components/mood-pills";
 import { useVoiceRecorder } from "@/hooks/use-voice-recorder";
@@ -32,7 +31,7 @@ export default function SessionPage() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const { isRecording, transcript, startRecording, stopRecording, resetTranscript } = useVoiceRecorder();
-  const { messages, isLoading, isComplete, questionCount, sendMessage, closeSession } = useSessionChat(sessionId, briefing);
+  const { messages, isLoading, isComplete, sendMessage, closeSession } = useSessionChat(sessionId, briefing);
 
   useEffect(() => {
     if (status === "unauthenticated") { router.push("/login"); return; }
@@ -102,27 +101,27 @@ export default function SessionPage() {
   return (
     <main className="relative flex min-h-dvh flex-col">
       <AuroraBackground />
-      <div className="relative z-10 mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-6 pb-2 flex items-center">
+      <div className="relative z-10 mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-6 pb-2 flex items-center justify-between">
         <AlertDialog>
           <AlertDialogTrigger
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-muted-foreground hover:text-foreground transition-colors"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.06] bg-white/[0.03] text-muted-foreground/60 hover:text-foreground hover:bg-white/[0.06] hover:border-white/10 transition-all duration-200"
           >
             <X className="h-4 w-4" />
           </AlertDialogTrigger>
-          <AlertDialogContent className="border-card-border bg-card/80 backdrop-blur-xl ring-0">
-            <AlertDialogHeader>
-              <AlertDialogTitle className="font-serif text-foreground">Abbandonare la sessione?</AlertDialogTitle>
-              <AlertDialogDescription className="text-muted-foreground/80">
+          <AlertDialogContent className="max-w-sm border border-white/[0.06] bg-[#111111]/90 backdrop-blur-2xl shadow-2xl shadow-black/40 rounded-2xl">
+            <AlertDialogHeader className="space-y-2">
+              <AlertDialogTitle className="font-serif text-lg text-foreground">Abbandonare la sessione?</AlertDialogTitle>
+              <AlertDialogDescription className="text-sm leading-relaxed text-muted-foreground/70">
                 Se esci ora perderai tutto quello che hai detto in questa sessione. Vuoi davvero uscire?
               </AlertDialogDescription>
             </AlertDialogHeader>
-            <AlertDialogFooter className="border-t-0 bg-transparent">
-              <AlertDialogCancel className="border-card-border bg-white/5 text-foreground hover:bg-white/10">Resta</AlertDialogCancel>
-              <AlertDialogAction className="bg-pink/15 text-pink hover:bg-pink/25 border border-pink/20" onClick={() => router.push("/")}>Esci</AlertDialogAction>
+            <AlertDialogFooter className="mt-4 flex gap-3 border-t-0 bg-transparent">
+              <AlertDialogCancel className="flex-1 rounded-xl border border-white/[0.06] bg-white/[0.03] text-foreground hover:bg-white/[0.06] transition-colors">Resta</AlertDialogCancel>
+              <AlertDialogAction className="flex-1 rounded-xl bg-pink/10 text-pink border border-pink/15 hover:bg-pink/20 transition-colors" onClick={() => router.push("/")}>Esci</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-        <div className="flex-1"><ProgressDots total={5} current={questionCount} /></div>
+        <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground/40">sessione</p>
       </div>
       <div ref={scrollRef} className="relative z-10 mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl flex-1 overflow-y-auto px-4 sm:px-6 pb-4">
         {messages.map((msg, i) => <ChatBubble key={i} role={msg.role} content={msg.content} />)}
