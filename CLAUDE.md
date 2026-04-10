@@ -11,7 +11,7 @@ AI-powered daily journaling web app focused on mental wellness. Users record tho
 - **LLM:** Gemini 3 Flash (`gemini-3-flash-preview`)
 - **Embeddings:** `gemini-embedding-2-preview` (768 dimensions)
 - **Speech-to-Text:** Web Speech API (browser native, Italian `it-IT`)
-- **Deploy:** Vercel
+- **Deploy:** Vercel (project: `jurnal` under `ch3dos-projects` team)
 
 ## Neon Database
 
@@ -25,10 +25,30 @@ AI-powered daily journaling web app focused on mental wellness. Users record tho
 - **Extensions:** pgvector
 - **Migration file:** `sql/migrations/001-initial-schema.sql`
 
+## GitHub Repository
+
+- **Repo:** `jurnal-org/artifact`
+- **URL:** `https://github.com/jurnal-org/artifact`
+- **Default branch:** `main`
+- **GitHub account:** `ch3do` (authenticated via `gh` CLI)
+
+## Vercel Deployment
+
+- **Team:** `ch3dos-projects`
+- **Project:** `jurnal`
+- **Production URL:** `https://jurnal-wheat.vercel.app`
+- **Auto-deploy:** connected to `jurnal-org/artifact` repo, deploys on push to `main`
+- **CLI auth:** `vercel` CLI authenticated as `ch3do`
+
 ## Google Cloud
 
+- **GCP Project:** `flowiseai` (shared with other projects)
+- **OAuth Client name:** `Thought`
 - **OAuth Client ID:** `1886479842-mreb8flqbl79m1n59dl3mqelusnik0cn.apps.googleusercontent.com`
-- **Redirect URI:** `http://localhost:3000/api/auth/callback/google` (dev), update for production
+- **OAuth consent screen:** External, In Production
+- **Redirect URIs:**
+  - `http://localhost:3000/api/auth/callback/google` (dev)
+  - `https://jurnal-wheat.vercel.app/api/auth/callback/google` (prod)
 - **Gemini API:** via Google AI Studio key in `GOOGLE_AI_API_KEY`
 
 ## Project Structure
@@ -112,15 +132,18 @@ npx tsc --noEmit     # Type check
 
 ## Environment Variables
 
-All in `.env.local` (not committed):
+All in `.env.local` (not committed). Also set on Vercel for production:
+
 - `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` — Google OAuth
 - `NEXTAUTH_SECRET` — NextAuth session encryption
-- `NEXTAUTH_URL` — App URL (http://localhost:3000 for dev)
+- `NEXTAUTH_URL` — `http://localhost:3000` (dev), `https://jurnal-wheat.vercel.app` (prod)
 - `DATABASE_URL` — Neon pooled connection string
 - `GOOGLE_AI_API_KEY` — Gemini API (chat + embeddings)
 - `GOOGLE_CLOUD_PROJECT_ID` / `GOOGLE_CLOUD_STT_API_KEY` — (reserved for Chirp 3 upgrade)
 
-## Design Docs
+## Documentation
 
-- **Spec:** `docs/superpowers/specs/2026-04-08-jurnal-design.md`
-- **Plan:** `docs/superpowers/plans/2026-04-08-jurnal-implementation.md`
+- **Progetto (funzionale):** `PROGETTO.md` — logiche, funzionalità, flussi utente, design e UX
+- **Specifiche tecniche:** `SPECIFICHE-TECNICHE.md` — stack, schema DB, API, infrastruttura, deploy, sicurezza
+- **Spec di design:** `docs/superpowers/specs/2026-04-08-jurnal-design.md`
+- **Piano implementazione:** `docs/superpowers/plans/2026-04-08-jurnal-implementation.md`

@@ -9,7 +9,7 @@ export function MoodScore({ score, size = "sm" }: MoodScoreProps) {
   return (
     <span
       className={`font-sans font-light ${color} ${
-        size === "lg" ? "text-6xl" : "text-2xl"
+        size === "lg" ? "text-5xl sm:text-6xl" : "text-2xl"
       }`}
     >
       {score}

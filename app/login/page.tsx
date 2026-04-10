@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 
 export default function LoginPage() {
   return (
-    <main className="flex min-h-dvh flex-col items-center justify-center gap-8 p-6">
+    <main className="flex min-h-dvh flex-col items-center justify-center gap-6 sm:gap-8 p-4 sm:p-6">
       <div className="text-center">
-        <h1 className="font-serif text-4xl text-foreground mb-2">Jurnal</h1>
+        <h1 className="font-serif text-3xl sm:text-4xl text-foreground mb-2">Jurnal</h1>
         <p className="text-muted text-sm">Il tuo diario personale</p>
       </div>
       <Button

@@ -54,9 +54,9 @@ export default function Home() {
     return (
       <main className="relative min-h-dvh pb-20">
         <AuroraBackground />
-        <div className="relative z-10 mx-auto max-w-md px-6 pt-12">
+        <div className="relative z-10 mx-auto max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-10 sm:pt-12">
           <p className="mb-1 text-sm text-teal-dim">{greeting()}, {userName}</p>
-          <h1 className="mb-8 font-serif text-2xl text-foreground">La tua giornata</h1>
+          <h1 className="mb-6 sm:mb-8 font-serif text-2xl sm:text-3xl text-foreground">La tua giornata</h1>
           <div className="mb-6 text-center">
             <MoodScore score={todaySession.mood_score!} size="lg" />
             <p className="mt-1 text-xs text-muted-foreground">mood di oggi</p>
@@ -64,7 +64,7 @@ export default function Home() {
               <MoodPills keywords={todaySession.mood_keywords} />
             </div>
           </div>
-          <div className="rounded-2xl border border-card-border bg-card p-5">
+          <div className="rounded-2xl border border-card-border bg-card p-4 sm:p-5">
             <p className="font-serif text-sm leading-relaxed text-muted">{todaySession.summary}</p>
           </div>
         </div>
@@ -77,9 +77,9 @@ export default function Home() {
   return (
     <main className="relative min-h-dvh pb-20">
       <AuroraBackground />
-      <div className="relative z-10 mx-auto flex min-h-dvh max-w-md flex-col items-center justify-center px-6">
+      <div className="relative z-10 mx-auto flex min-h-dvh max-w-md sm:max-w-lg md:max-w-xl flex-col items-center justify-center px-4 sm:px-6">
         <p className="mb-1 text-sm text-teal-dim">{greeting()}, {userName}</p>
-        <h1 className="mb-12 font-serif text-3xl text-foreground">Come ti senti stasera?</h1>
+        <h1 className="mb-10 sm:mb-12 font-serif text-2xl sm:text-3xl text-foreground">Come ti senti stasera?</h1>
         <VoiceRecorder isRecording={false} onStart={handleStartSession} onStop={() => {}} />
       </div>
       <BottomNav />

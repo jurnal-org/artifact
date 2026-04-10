@@ -10,7 +10,7 @@ export function MoodChart({ data }: MoodChartProps) {
   }));
 
   return (
-    <div className="h-48 w-full">
+    <div className="h-36 sm:h-44 md:h-48 w-full">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={formatted}>
           <XAxis dataKey="label" tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 10 }} axisLine={false} tickLine={false} />

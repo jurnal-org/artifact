@@ -26,8 +26,8 @@ export default function HistoryPage() {
   return (
     <main className="relative min-h-dvh pb-20">
       <AuroraBackground />
-      <div className="relative z-10 mx-auto max-w-md px-6 pt-12">
-        <h1 className="mb-8 font-serif text-2xl text-foreground">Storico</h1>
+      <div className="relative z-10 mx-auto max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-10 sm:pt-12">
+        <h1 className="mb-6 sm:mb-8 font-serif text-2xl sm:text-3xl text-foreground">Storico</h1>
         {loading ? (
           <div className="flex justify-center pt-12">
             <div className="h-8 w-8 animate-spin rounded-full border-2 border-violet border-t-transparent" />

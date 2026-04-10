@@ -24,7 +24,7 @@ export function SessionCard({
   return (
     <button
       onClick={onClick}
-      className="w-full rounded-2xl border border-card-border bg-card p-4 text-left transition-colors hover:bg-white/[0.04]"
+      className="w-full rounded-2xl border border-card-border bg-card p-3 sm:p-4 text-left transition-colors hover:bg-white/[0.04]"
     >
       <div className="mb-2 flex items-center justify-between">
         <span className="text-xs uppercase tracking-wide text-teal-dim">

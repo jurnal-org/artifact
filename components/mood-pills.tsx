@@ -32,11 +32,11 @@ const sentimentColor = (keyword: string): string => {
 
 export function MoodPills({ keywords }: MoodPillsProps) {
   return (
-    <div className="flex flex-wrap gap-1.5">
+    <div className="flex flex-wrap gap-1 sm:gap-1.5">
       {keywords.map((kw) => (
         <span
           key={kw}
-          className={`rounded-full border px-3 py-1 text-xs ${sentimentColor(kw)}`}
+          className={`rounded-full border px-2 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs ${sentimentColor(kw)}`}
         >
           {kw}
         </span>

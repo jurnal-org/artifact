@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
@@ -14,6 +14,12 @@ const libreBaskerville = Libre_Baskerville({
   variable: "--font-serif",
   weight: ["400", "700"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "Jurnal",

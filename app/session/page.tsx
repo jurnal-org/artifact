@@ -76,7 +76,7 @@ export default function SessionPage() {
     return (
       <main className="relative min-h-dvh">
         <AuroraBackground />
-        <div className="relative z-10 mx-auto max-w-md px-6 pt-16 pb-8">
+        <div className="relative z-10 mx-auto max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-12 sm:pt-16 pb-8">
           <div className="mb-8 text-center">
             <MoodScore score={closureResult.mood_score} size="lg" />
             <p className="mt-1 text-xs text-muted-foreground">mood di oggi</p>
@@ -98,11 +98,11 @@ export default function SessionPage() {
   return (
     <main className="relative flex min-h-dvh flex-col">
       <AuroraBackground />
-      <div className="relative z-10 px-6 pt-6 pb-2"><ProgressDots total={5} current={questionCount} /></div>
-      <div ref={scrollRef} className="relative z-10 flex-1 overflow-y-auto px-6 pb-4">
+      <div className="relative z-10 mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-6 pb-2"><ProgressDots total={5} current={questionCount} /></div>
+      <div ref={scrollRef} className="relative z-10 mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl flex-1 overflow-y-auto px-4 sm:px-6 pb-4">
         {messages.map((msg, i) => <ChatBubble key={i} role={msg.role} content={msg.content} />)}
         {isRecording && transcript && (
-          <div className="ml-10 mb-4 rounded-2xl rounded-br-sm border border-teal/10 bg-teal/[0.06] p-4 opacity-60">
+          <div className="ml-6 sm:ml-10 mb-4 rounded-2xl rounded-br-sm border border-teal/10 bg-teal/[0.06] p-3 sm:p-4 opacity-60">
             <p className="text-sm leading-relaxed text-muted">{transcript}</p>
           </div>
         )}
@@ -117,16 +117,16 @@ export default function SessionPage() {
           </div>
         )}
       </div>
-      <div className="relative z-10 border-t border-card-border bg-background/80 backdrop-blur-xl px-6 py-4">
+      <div className="relative z-10 border-t border-card-border bg-background/80 backdrop-blur-xl px-4 sm:px-6 py-3 sm:py-4">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center">
-            <p className="mb-4 font-serif text-lg text-foreground">Raccontami della tua giornata</p>
+            <p className="mb-4 font-serif text-base sm:text-lg text-foreground">Raccontami della tua giornata</p>
             <VoiceRecorder isRecording={isRecording} onStart={startRecording} onStop={handleStopRecording} />
           </div>
         ) : (
-          <div className="flex items-center gap-3">
+          <div className="mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl flex items-center gap-2 sm:gap-3">
             <button onClick={isRecording ? handleStopRecording : startRecording}
-              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all ${
+              className={`flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border transition-all ${
                 isRecording ? "border-pink/30 bg-pink/20" : "border-white/10 bg-white/5"
               }`}>
               {isRecording ? <div className="h-3 w-3 rounded-sm bg-pink" /> : (

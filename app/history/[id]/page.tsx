@@ -42,20 +42,20 @@ export default function SessionDetailPage() {
   return (
     <main className="relative min-h-dvh">
       <AuroraBackground />
-      <div className="relative z-10 mx-auto max-w-md px-6 pt-6 pb-8">
+      <div className="relative z-10 mx-auto max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-6 pb-8">
         <Button variant="ghost" size="sm" className="mb-4 text-muted-foreground hover:text-foreground"
           onClick={() => router.push("/history")}>
           <ArrowLeft className="mr-1 h-4 w-4" /> Storico
         </Button>
         <p className="mb-1 text-xs uppercase tracking-wide text-teal-dim">{formattedDate}</p>
         {session.mood_score && (
-          <div className="mb-6 flex items-center gap-4">
+          <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
             <MoodScore score={session.mood_score} size="lg" />
             <MoodPills keywords={session.mood_keywords} />
           </div>
         )}
         {session.summary && (
-          <div className="mb-8 rounded-2xl border border-card-border bg-card p-5">
+          <div className="mb-8 rounded-2xl border border-card-border bg-card p-4 sm:p-5">
             <p className="font-serif text-sm leading-relaxed text-muted">{session.summary}</p>
           </div>
         )}

@@ -29,12 +29,12 @@ export default function DashboardPage() {
   return (
     <main className="relative min-h-dvh pb-20">
       <AuroraBackground />
-      <div className="relative z-10 mx-auto max-w-md px-6 pt-12">
-        <h1 className="mb-8 font-serif text-2xl text-foreground">Trend</h1>
+      <div className="relative z-10 mx-auto max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-10 sm:pt-12">
+        <h1 className="mb-6 sm:mb-8 font-serif text-2xl sm:text-3xl text-foreground">Trend</h1>
         <div className="mb-6 flex gap-2">
           {[{ label: "7g", value: 7 }, { label: "30g", value: 30 }, { label: "90g", value: 90 }].map((period) => (
             <button key={period.value} onClick={() => setDays(period.value)}
-              className={`rounded-full px-4 py-1.5 text-xs transition-colors ${
+              className={`rounded-full px-3 sm:px-4 py-1.5 text-xs transition-colors ${
                 days === period.value ? "bg-violet/20 text-violet-light border border-violet/20"
                   : "bg-card text-muted-foreground border border-card-border"
               }`}>{period.label}</button>
