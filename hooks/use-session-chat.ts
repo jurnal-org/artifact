@@ -1,11 +1,12 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import type { AiResponse, Message, SessionBriefing } from "@/lib/types";
 
 interface UseSessionChatReturn {
   messages: Pick<Message, "role" | "content">[];
   isLoading: boolean;
   isComplete: boolean;
+  isRestoring: boolean;
   sendMessage: (content: string) => Promise<void>;
   closeSession: () => Promise<{ summary: string; mood_score: number; mood_keywords: string[] } | null>;
 }
@@ -14,6 +15,23 @@ export function useSessionChat(sessionId: string | null, briefing: SessionBriefi
   const [messages, setMessages] = useState<Pick<Message, "role" | "content">[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
+  const [isRestoring, setIsRestoring] = useState(false);
+
+  // Restore messages from DB when resuming an existing session
+  useEffect(() => {
+    if (!sessionId) return;
+    setIsRestoring(true);
+    fetch(`/api/sessions/${sessionId}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.messages && data.messages.length > 0) {
+          setMessages(data.messages.map((m: Message) => ({ role: m.role, content: m.content })));
+        }
+      })
+      .catch((err) => console.error("Failed to restore messages:", err))
+      .finally(() => setIsRestoring(false));
+  }, [sessionId]);
+
   const sendMessage = useCallback(async (content: string) => {
     if (!sessionId || !briefing || isComplete) return;
     setMessages((prev) => [...prev, { role: "user", content }]);
@@ -49,5 +67,5 @@ export function useSessionChat(sessionId: string | null, briefing: SessionBriefi
     }
   }, [sessionId]);
 
-  return { messages, isLoading, isComplete, sendMessage, closeSession };
+  return { messages, isLoading, isComplete, isRestoring, sendMessage, closeSession };
 }

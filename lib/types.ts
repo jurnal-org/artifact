@@ -42,6 +42,7 @@ export interface Message {
 
 export interface SessionBriefing {
   todayFollowUps: Fact[];
+  significantRecent: Fact[];
   moodTrend: { date: string; mood_score: number; mood_keywords: string[] }[];
   correlatedFacts: Fact[];
 }

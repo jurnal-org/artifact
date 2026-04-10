@@ -31,7 +31,7 @@ export default function SessionPage() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const { isRecording, transcript, startRecording, stopRecording, resetTranscript } = useVoiceRecorder();
-  const { messages, isLoading, isComplete, sendMessage, closeSession } = useSessionChat(sessionId, briefing);
+  const { messages, isLoading, isComplete, isRestoring, sendMessage, closeSession } = useSessionChat(sessionId, briefing);
 
   useEffect(() => {
     if (status === "unauthenticated") { router.push("/login"); return; }
@@ -110,13 +110,13 @@ export default function SessionPage() {
           </AlertDialogTrigger>
           <AlertDialogContent className="max-w-sm border border-white/[0.06] bg-[#111111]/90 backdrop-blur-2xl shadow-2xl shadow-black/40 rounded-2xl">
             <AlertDialogHeader className="space-y-2">
-              <AlertDialogTitle className="font-serif text-lg text-foreground">Abbandonare la sessione?</AlertDialogTitle>
+              <AlertDialogTitle className="font-serif text-lg text-foreground">Uscire dalla sessione?</AlertDialogTitle>
               <AlertDialogDescription className="text-sm leading-relaxed text-muted-foreground/70">
-                Se esci ora perderai tutto quello che hai detto in questa sessione. Vuoi davvero uscire?
+                I tuoi messaggi sono salvati. Potrai riprendere la sessione quando vuoi, oppure chiuderla adesso senza generare il riassunto.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter className="mt-4 flex gap-3 border-t-0 bg-transparent">
-              <AlertDialogCancel className="flex-1 rounded-xl border border-white/[0.06] bg-white/[0.03] text-foreground hover:bg-white/[0.06] transition-colors">Resta</AlertDialogCancel>
+              <AlertDialogCancel className="flex-1 rounded-xl border border-white/[0.06] bg-white/[0.03] text-foreground hover:bg-white/[0.06] transition-colors">Continua</AlertDialogCancel>
               <AlertDialogAction className="flex-1 rounded-xl bg-pink/10 text-pink border border-pink/15 hover:bg-pink/20 transition-colors" onClick={() => router.push("/")}>Esci</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
@@ -124,6 +124,12 @@ export default function SessionPage() {
         <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground/40">sessione</p>
       </div>
       <div ref={scrollRef} className="relative z-10 mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl flex-1 overflow-y-auto px-4 sm:px-6 pb-4">
+        {isRestoring && (
+          <div className="mb-4 flex items-center gap-2 text-muted-foreground/50">
+            <div className="h-3 w-3 animate-spin rounded-full border border-violet-dim border-t-transparent" />
+            <span className="text-xs">Ripristino conversazione...</span>
+          </div>
+        )}
         {messages.map((msg, i) => <ChatBubble key={i} role={msg.role} content={msg.content} />)}
         {isRecording && transcript && (
           <div className="ml-6 sm:ml-10 mb-4 rounded-2xl rounded-br-sm border border-teal/10 bg-teal/[0.06] p-3 sm:p-4 opacity-60">
