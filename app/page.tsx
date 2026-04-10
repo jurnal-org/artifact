@@ -15,6 +15,7 @@ export default function Home() {
   const router = useRouter();
   const [todaySession, setTodaySession] = useState<JurnalSession | null>(null);
   const [loading, setLoading] = useState(true);
+  const [starting, setStarting] = useState(false);
 
   useEffect(() => {
     if (status === "unauthenticated") { router.push("/login"); return; }
@@ -44,9 +45,15 @@ export default function Home() {
   const userName = authSession?.user?.name?.split(" ")[0] ?? "";
 
   const handleStartSession = async () => {
-    const res = await fetch("/api/sessions", { method: "POST" });
-    const data = await res.json();
-    if (data.session) router.push("/session");
+    if (starting) return;
+    setStarting(true);
+    try {
+      const res = await fetch("/api/sessions", { method: "POST" });
+      const data = await res.json();
+      if (data.session) router.push("/session");
+    } catch {
+      setStarting(false);
+    }
   };
 
   return (
@@ -74,7 +81,7 @@ export default function Home() {
         )}
 
         <div className="flex flex-col items-center">
-          <VoiceRecorder isRecording={false} onStart={handleStartSession} onStop={() => {}} />
+          <VoiceRecorder isRecording={false} isLoading={starting} onStart={handleStartSession} onStop={() => {}} />
         </div>
       </div>
       <BottomNav />
