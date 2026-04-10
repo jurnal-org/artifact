@@ -109,16 +109,16 @@ export default function SessionPage() {
           >
             <X className="h-4 w-4" />
           </AlertDialogTrigger>
-          <AlertDialogContent className="border-card-border bg-background">
+          <AlertDialogContent className="border-card-border bg-card/80 backdrop-blur-xl ring-0">
             <AlertDialogHeader>
-              <AlertDialogTitle>Abbandonare la sessione?</AlertDialogTitle>
-              <AlertDialogDescription>
+              <AlertDialogTitle className="font-serif text-foreground">Abbandonare la sessione?</AlertDialogTitle>
+              <AlertDialogDescription className="text-muted-foreground/80">
                 Se esci ora perderai tutto quello che hai detto in questa sessione. Vuoi davvero uscire?
               </AlertDialogDescription>
             </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel className="border-card-border bg-card text-foreground hover:bg-white/5">Resta</AlertDialogCancel>
-              <AlertDialogAction className="bg-pink/20 text-pink hover:bg-pink/30 border border-pink/30" onClick={() => router.push("/")}>Esci</AlertDialogAction>
+            <AlertDialogFooter className="border-t-0 bg-transparent">
+              <AlertDialogCancel className="border-card-border bg-white/5 text-foreground hover:bg-white/10">Resta</AlertDialogCancel>
+              <AlertDialogAction className="bg-pink/15 text-pink hover:bg-pink/25 border border-pink/20" onClick={() => router.push("/")}>Esci</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
