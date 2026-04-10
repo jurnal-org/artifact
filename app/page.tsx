@@ -8,6 +8,8 @@ import { BottomNav } from "@/components/bottom-nav";
 import { MoodScore } from "@/components/mood-score";
 import { MoodPills } from "@/components/mood-pills";
 import { VoiceRecorder } from "@/components/voice-recorder";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 import type { Session as JurnalSession } from "@/lib/types";
 
 export default function Home() {
@@ -67,6 +69,14 @@ export default function Home() {
           <div className="rounded-2xl border border-card-border bg-card p-4 sm:p-5">
             <p className="font-serif text-sm leading-relaxed text-muted">{todaySession.summary}</p>
           </div>
+          <Button
+            variant="outline"
+            className="mt-6 w-full border-card-border bg-card text-foreground hover:bg-white/5"
+            onClick={handleStartSession}
+          >
+            <Plus className="mr-2 h-4 w-4" />
+            Nuova sessione
+          </Button>
         </div>
         <BottomNav />
       </main>
