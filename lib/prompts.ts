@@ -52,7 +52,7 @@ export function buildClosurePrompt(): string {
 
 ## Regole
 - Il riassunto deve coprire TUTTE le sessioni della giornata in modo unitario, come se fosse un unico racconto della giornata
-- Il riassunto deve essere in italiano, 2-3 paragrafi, in terza persona
+- Il riassunto deve essere in italiano, 2-3 paragrafi, in PRIMA persona (come se fosse l'utente a scrivere: "oggi mi sento...", "a lavoro è successo...", MAI in terza persona come "oggi Luca si sente...")
 - Il mood_score va da 1 (molto negativo) a 100 (molto positivo)
 - Le mood_keywords sono 3-5 parole che descrivono lo stato emotivo
 - I facts sono informazioni salienti da ricordare per sessioni future

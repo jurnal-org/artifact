@@ -103,7 +103,7 @@
     -webkit-tap-highlight-color: transparent;
   }
   html {
-    @apply font-sans;
+    @apply font-serif;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }

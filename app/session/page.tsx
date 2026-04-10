@@ -13,7 +13,11 @@ import { useVoiceRecorder } from "@/hooks/use-voice-recorder";
 import { useSessionChat } from "@/hooks/use-session-chat";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Send } from "lucide-react";
+import { Send, X } from "lucide-react";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import type { SessionBriefing } from "@/lib/types";
 
 export default function SessionPage() {
@@ -98,7 +102,28 @@ export default function SessionPage() {
   return (
     <main className="relative flex min-h-dvh flex-col">
       <AuroraBackground />
-      <div className="relative z-10 mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-6 pb-2"><ProgressDots total={5} current={questionCount} /></div>
+      <div className="relative z-10 mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-6 pb-2 flex items-center">
+        <AlertDialog>
+          <AlertDialogTrigger
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <X className="h-4 w-4" />
+          </AlertDialogTrigger>
+          <AlertDialogContent className="border-card-border bg-background">
+            <AlertDialogHeader>
+              <AlertDialogTitle>Abbandonare la sessione?</AlertDialogTitle>
+              <AlertDialogDescription>
+                Se esci ora perderai tutto quello che hai detto in questa sessione. Vuoi davvero uscire?
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel className="border-card-border bg-card text-foreground hover:bg-white/5">Resta</AlertDialogCancel>
+              <AlertDialogAction className="bg-pink/20 text-pink hover:bg-pink/30 border border-pink/30" onClick={() => router.push("/")}>Esci</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+        <div className="flex-1"><ProgressDots total={5} current={questionCount} /></div>
+      </div>
       <div ref={scrollRef} className="relative z-10 mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl flex-1 overflow-y-auto px-4 sm:px-6 pb-4">
         {messages.map((msg, i) => <ChatBubble key={i} role={msg.role} content={msg.content} />)}
         {isRecording && transcript && (
@@ -118,31 +143,20 @@ export default function SessionPage() {
         )}
       </div>
       <div className="relative z-10 border-t border-card-border bg-background/80 backdrop-blur-xl px-4 sm:px-6 py-3 sm:py-4">
-        {messages.length === 0 ? (
-          <div className="flex flex-col items-center">
-            <p className="mb-4 font-serif text-base sm:text-lg text-foreground">Raccontami della tua giornata</p>
-            <VoiceRecorder isRecording={isRecording} onStart={startRecording} onStop={handleStopRecording} />
-          </div>
-        ) : (
-          <div className="mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl flex items-center gap-2 sm:gap-3">
-            <button onClick={isRecording ? handleStopRecording : startRecording}
-              className={`flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border transition-all ${
-                isRecording ? "border-pink/30 bg-pink/20" : "border-white/10 bg-white/5"
-              }`}>
-              {isRecording ? <div className="h-3 w-3 rounded-sm bg-pink" /> : (
-                <svg className="h-4 w-4 text-muted" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1 7h2v-2c3.93-.5 7-3.88 7-7.95h-2c0 3.31-2.69 6-6 6s-6-2.69-6-6H4c0 4.07 3.07 7.45 7 7.95V21z" />
-                </svg>
-              )}
-            </button>
-            <form onSubmit={handleTextSubmit} className="flex flex-1 gap-2">
+        <div className="flex flex-col items-center gap-3">
+          {messages.length === 0 && (
+            <p className="font-serif text-base sm:text-lg text-foreground">Raccontami della tua giornata</p>
+          )}
+          <VoiceRecorder isRecording={isRecording} onStart={startRecording} onStop={handleStopRecording} />
+          {messages.length > 0 && (
+            <form onSubmit={handleTextSubmit} className="mx-auto w-full max-w-md sm:max-w-lg md:max-w-xl flex items-center gap-2">
               <Input value={textInput} onChange={(e) => setTextInput(e.target.value)}
                 placeholder="Scrivi qui..." className="border-card-border bg-card text-foreground placeholder:text-muted-foreground" disabled={isLoading} />
               <Button type="submit" size="icon" variant="ghost" disabled={!textInput.trim() || isLoading}
                 className="text-muted hover:text-foreground"><Send className="h-4 w-4" /></Button>
             </form>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </main>
   );

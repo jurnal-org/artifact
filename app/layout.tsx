@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="it" className="dark">
       <body
-        className={`${dmSans.variable} ${libreBaskerville.variable} font-sans bg-background text-foreground antialiased`}
+        className={`${dmSans.variable} ${libreBaskerville.variable} font-serif bg-background text-foreground antialiased`}
       >
         <Providers>{children}</Providers>
       </body>
