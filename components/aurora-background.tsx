@@ -3,51 +3,66 @@
 export function AuroraBackground() {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Top-left violet blob */}
+      {/* Base dark wash to unify colors */}
+      <div className="absolute inset-0 bg-[#0a0a0a]" />
+
+      {/* Top-left violet glow */}
       <div
-        className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full blur-[100px] animate-aurora-1"
+        className="absolute -top-48 -left-48 w-[800px] h-[800px] rounded-full animate-aurora-1 will-change-transform"
         style={{
-          background: "rgba(120, 80, 220, 0.25)",
+          background:
+            "radial-gradient(circle, rgba(120, 80, 220, 0.14) 0%, rgba(120, 80, 220, 0.05) 40%, transparent 70%)",
+          filter: "blur(80px)",
         }}
       />
-      {/* Top-right teal blob */}
+      {/* Top-right teal glow */}
       <div
-        className="absolute -top-20 -right-40 w-[500px] h-[700px] rounded-full blur-[120px] animate-aurora-2"
+        className="absolute -top-32 -right-56 w-[700px] h-[900px] animate-aurora-2 will-change-transform"
         style={{
-          background: "rgba(60, 180, 160, 0.2)",
+          background:
+            "radial-gradient(ellipse, rgba(60, 180, 160, 0.12) 0%, rgba(60, 180, 160, 0.04) 40%, transparent 70%)",
           borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%",
+          filter: "blur(90px)",
         }}
       />
-      {/* Center-left teal blob */}
+      {/* Center-left teal glow */}
       <div
-        className="absolute top-1/3 -left-20 w-[400px] h-[500px] blur-[90px] animate-aurora-3"
+        className="absolute top-1/3 -left-32 w-[600px] h-[700px] animate-aurora-3 will-change-transform"
         style={{
-          background: "rgba(60, 180, 160, 0.18)",
+          background:
+            "radial-gradient(ellipse, rgba(60, 180, 160, 0.10) 0%, rgba(60, 180, 160, 0.03) 40%, transparent 70%)",
           borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
+          filter: "blur(80px)",
         }}
       />
-      {/* Center violet blob */}
+      {/* Center violet glow */}
       <div
-        className="absolute top-1/2 left-1/3 w-[500px] h-[400px] blur-[110px] animate-aurora-4"
+        className="absolute top-1/2 left-1/3 w-[700px] h-[600px] animate-aurora-4 will-change-transform"
         style={{
-          background: "rgba(120, 80, 220, 0.2)",
+          background:
+            "radial-gradient(ellipse, rgba(120, 80, 220, 0.11) 0%, rgba(120, 80, 220, 0.04) 40%, transparent 70%)",
           borderRadius: "40% 60% 70% 30% / 50% 60% 40% 50%",
+          filter: "blur(100px)",
         }}
       />
-      {/* Bottom-right violet blob */}
+      {/* Bottom-right violet glow */}
       <div
-        className="absolute -bottom-32 -right-20 w-[550px] h-[550px] blur-[100px] animate-aurora-5"
+        className="absolute -bottom-48 -right-32 w-[750px] h-[750px] animate-aurora-5 will-change-transform"
         style={{
-          background: "rgba(120, 80, 220, 0.22)",
+          background:
+            "radial-gradient(circle, rgba(120, 80, 220, 0.12) 0%, rgba(120, 80, 220, 0.04) 40%, transparent 70%)",
           borderRadius: "70% 30% 50% 50% / 40% 60% 40% 60%",
+          filter: "blur(90px)",
         }}
       />
-      {/* Bottom-left teal blob */}
+      {/* Bottom-left teal glow */}
       <div
-        className="absolute -bottom-20 left-10 w-[450px] h-[600px] blur-[110px] animate-aurora-6"
+        className="absolute -bottom-32 left-0 w-[650px] h-[800px] animate-aurora-6 will-change-transform"
         style={{
-          background: "rgba(60, 180, 160, 0.15)",
+          background:
+            "radial-gradient(ellipse, rgba(60, 180, 160, 0.08) 0%, rgba(60, 180, 160, 0.03) 40%, transparent 70%)",
           borderRadius: "50% 50% 30% 70% / 70% 30% 50% 50%",
+          filter: "blur(80px)",
         }}
       />
     </div>
