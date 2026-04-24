@@ -51,7 +51,7 @@ export default function SessionDetailPage() {
       <AuroraBackground />
       <BottomNav />
 
-      <div className="relative z-10 md:pl-[84px] px-5 sm:px-8 md:px-10 pt-8 md:pt-10">
+      <div className="relative z-10 px-5 sm:px-8 md:px-10 pt-8 md:pt-10 md:max-w-[75vw] md:mx-auto">
         {/* Back */}
         <button
           onClick={() => router.push("/history")}

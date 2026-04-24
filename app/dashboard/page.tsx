@@ -73,7 +73,7 @@ export default function DashboardPage() {
       <AuroraBackground />
       <BottomNav />
 
-      <div className="relative z-10 md:pl-[84px] px-5 sm:px-8 md:px-10 pt-10 md:pt-12">
+      <div className="relative z-10 px-5 sm:px-8 md:px-10 pt-10 md:pt-12 md:max-w-[75vw] md:mx-auto">
         {/* Header */}
         <div className="mb-6 flex items-center justify-between">
           <h1 className="font-serif text-2xl sm:text-3xl text-foreground">Trend</h1>

@@ -11,9 +11,8 @@ const tabs = [
 ];
 
 const logo = (
-  <div className="mb-5 flex h-8 w-8 items-center justify-center rounded-[10px] border border-white/[0.14] bg-gradient-to-br from-violet/60 to-teal/40 shadow-[0_4px_12px_rgba(120,80,220,0.28)]">
-    <span className="font-serif text-sm font-semibold text-white/90 leading-none select-none">J</span>
-  </div>
+  // eslint-disable-next-line @next/next/no-img-element
+  <img src="/favicon.ico" alt="Jurnal" className="mb-5 h-8 w-8 rounded-[10px] object-cover shadow-[0_4px_12px_rgba(120,80,220,0.28)]" />
 );
 
 export function BottomNav() {

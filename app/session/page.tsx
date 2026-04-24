@@ -80,7 +80,7 @@ export default function SessionPage() {
       <main className="relative min-h-dvh pb-6">
         <AuroraBackground />
         <BottomNav />
-        <div className="relative z-10 md:pl-[84px] px-5 sm:px-8 md:px-10 pt-12">
+        <div className="relative z-10 px-5 sm:px-8 md:px-10 pt-12 md:max-w-[75vw] md:mx-auto">
           <div className="relative overflow-hidden rounded-[20px] border border-white/[0.11] bg-gradient-to-br from-white/[0.08] via-white/[0.025] to-violet/[0.04] p-6 backdrop-blur-xl shadow-[0_6px_24px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.10)] glass-shimmer mb-6">
             <div className="flex items-center gap-4 mb-4">
               <div className={`flex items-center gap-2.5 rounded-full border px-3 py-1.5 ${colors.badge}`}>
@@ -107,8 +107,7 @@ export default function SessionPage() {
       {/* Sidebar nav (desktop only — no bottom pill during session) */}
       <BottomNav />
 
-      {/* Content offset for sidebar on desktop */}
-      <div className="relative z-10 flex flex-col flex-1 md:pl-[84px]">
+      <div className="relative z-10 flex flex-col flex-1 w-full md:max-w-[75vw] md:mx-auto">
         {/* Top bar */}
         <div className="flex items-center justify-between px-5 sm:px-8 md:px-10 pt-5 pb-3 flex-shrink-0">
           <AlertDialog>

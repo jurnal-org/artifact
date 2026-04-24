@@ -24,6 +24,7 @@ export default function LoginPage() {
         </svg>
         Accedi con Google
       </Button>
+
     </main>
   );
 }
