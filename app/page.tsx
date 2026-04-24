@@ -66,7 +66,7 @@ export default function Home() {
       <AuroraBackground />
       <BottomNav />
 
-      <div className="relative z-10 md:pl-[84px] px-5 sm:px-8 md:px-10 pt-10 md:pt-12 max-w-4xl">
+      <div className="relative z-10 md:pl-[84px] px-5 sm:px-8 md:px-10 pt-10 md:pt-12">
         <p className="mb-1 text-xs font-sans tracking-wide text-teal/70">
           {greeting()}, {userName}
         </p>

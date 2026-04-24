@@ -11,6 +11,7 @@ interface DashboardData {
   moodData: { date: string; mood_score: number; mood_keywords: string[] }[];
   keywords: { keyword: string; count: number }[];
   trend: string | null;
+  trendDelta: number | null;
 }
 
 const PERIODS = [
@@ -72,7 +73,7 @@ export default function DashboardPage() {
       <AuroraBackground />
       <BottomNav />
 
-      <div className="relative z-10 md:pl-[84px] px-5 sm:px-8 md:px-10 pt-10 md:pt-12 max-w-4xl">
+      <div className="relative z-10 md:pl-[84px] px-5 sm:px-8 md:px-10 pt-10 md:pt-12">
         {/* Header */}
         <div className="mb-6 flex items-center justify-between">
           <h1 className="font-serif text-2xl sm:text-3xl text-foreground">Trend</h1>
@@ -108,7 +109,15 @@ export default function DashboardPage() {
               {[
                 { val: avgMood?.toString() ?? "—", label: "Media mood", color: avgColor },
                 { val: data.moodData.length.toString(), label: "Sessioni", color: "text-violet-light" },
-                { val: `${data.moodData.length > 0 ? "↑" : "—"}`, label: "vs periodo prec.", color: "text-teal" },
+                {
+                val: data.trendDelta != null
+                  ? `${data.trendDelta > 0 ? "+" : ""}${data.trendDelta}`
+                  : "—",
+                label: "vs periodo prec.",
+                color: data.trendDelta != null
+                  ? data.trendDelta > 0 ? "text-teal" : data.trendDelta < 0 ? "text-pink-light" : "text-violet-light"
+                  : "text-white/40",
+              },
               ].map(({ val, label, color }) => (
                 <div key={label} className="relative overflow-hidden rounded-[14px] border border-white/[0.09] bg-white/[0.05] px-3 py-3 text-center backdrop-blur-xl shadow-[0_4px_16px_rgba(0,0,0,0.22)]">
                   <div className={`text-2xl font-light leading-none mb-1 ${color}`}>{val}</div>

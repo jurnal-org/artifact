@@ -40,5 +40,16 @@ export async function GET(req: Request) {
     }
   }
 
-  return NextResponse.json({ moodData, keywords: keywordData, trend });
+  let trendDelta: number | null = null;
+  if (moodData.length >= 7) {
+    const recent = moodData.slice(-7);
+    const older = moodData.slice(-14, -7);
+    if (older.length > 0) {
+      const recentAvg = recent.reduce((s, r) => s + (r.mood_score as number), 0) / recent.length;
+      const olderAvg = older.reduce((s, r) => s + (r.mood_score as number), 0) / older.length;
+      trendDelta = Math.round(recentAvg - olderAvg);
+    }
+  }
+
+  return NextResponse.json({ moodData, keywords: keywordData, trend, trendDelta });
 }

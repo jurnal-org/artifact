@@ -44,7 +44,7 @@ export default function HistoryPage() {
       <AuroraBackground />
       <BottomNav />
 
-      <div className="relative z-10 md:pl-[84px] px-5 sm:px-8 md:px-10 pt-10 md:pt-12 max-w-3xl">
+      <div className="relative z-10 md:pl-[84px] px-5 sm:px-8 md:px-10 pt-10 md:pt-12">
         <h1 className="mb-8 font-serif text-2xl sm:text-3xl text-foreground">Storico</h1>
 
         {loading ? (
