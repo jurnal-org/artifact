@@ -6,20 +6,20 @@ interface ChatBubbleProps {
 export function ChatBubble({ role, content }: ChatBubbleProps) {
   const isUser = role === "user";
   return (
-    <div className={`mb-4 ${isUser ? "ml-6 sm:ml-10" : ""}`}>
+    <div className={`mb-3 flex flex-col ${isUser ? "items-end" : "items-start"}`}>
       {!isUser && (
-        <span className="mb-1 block text-[10px] font-medium uppercase tracking-widest text-violet-dim">
+        <span className="mb-1.5 ml-1 text-[9px] font-sans font-medium uppercase tracking-[2.5px] text-violet/55">
           Jurnal
         </span>
       )}
       <div
-        className={`rounded-2xl p-4 ${
+        className={`max-w-[80%] rounded-[18px] px-4 py-3 text-sm leading-relaxed backdrop-blur-xl shadow-[0_4px_16px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.08)] ${
           isUser
-            ? "rounded-br-sm border border-teal/10 bg-teal/[0.06]"
-            : "rounded-bl-sm border border-violet/10 bg-violet/[0.06]"
+            ? "rounded-br-[4px] bg-gradient-to-br from-teal/[0.12] to-teal/[0.05] border border-teal/[0.18] text-white/68"
+            : "rounded-bl-[4px] bg-gradient-to-br from-violet/[0.10] to-violet/[0.04] border border-violet/[0.16] text-white/62 font-serif italic"
         }`}
       >
-        <p className="text-sm leading-relaxed text-muted">{content}</p>
+        {content}
       </div>
     </div>
   );

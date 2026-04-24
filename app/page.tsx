@@ -5,10 +5,15 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AuroraBackground } from "@/components/aurora-background";
 import { BottomNav } from "@/components/bottom-nav";
-import { MoodScore } from "@/components/mood-score";
 import { MoodPills } from "@/components/mood-pills";
 import { VoiceRecorder } from "@/components/voice-recorder";
 import type { Session as JurnalSession } from "@/lib/types";
+
+function moodColor(score: number) {
+  if (score >= 70) return { dot: "bg-teal", badge: "bg-teal/[0.12] border-teal/[0.26]", num: "text-teal" };
+  if (score >= 40) return { dot: "bg-violet", badge: "bg-violet/[0.12] border-violet/[0.26]", num: "text-violet-light" };
+  return { dot: "bg-pink", badge: "bg-pink/[0.12] border-pink/[0.26]", num: "text-pink-light" };
+}
 
 export default function Home() {
   const { data: authSession, status } = useSession();
@@ -36,9 +41,9 @@ export default function Home() {
   }
 
   const greeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return "Buongiorno";
-    if (hour < 18) return "Buon pomeriggio";
+    const h = new Date().getHours();
+    if (h < 12) return "Buongiorno";
+    if (h < 18) return "Buon pomeriggio";
     return "Buonasera";
   };
 
@@ -50,45 +55,53 @@ export default function Home() {
     try {
       const res = await fetch("/api/sessions", { method: "POST" });
       const data = await res.json();
-      if (data.session) {
-        router.push("/session");
-      } else {
-        setStarting(false);
-      }
-    } catch {
-      setStarting(false);
-    }
+      if (data.session) { router.push("/session"); } else { setStarting(false); }
+    } catch { setStarting(false); }
   };
 
+  const colors = todaySession?.mood_score ? moodColor(todaySession.mood_score) : null;
+
   return (
-    <main className="relative min-h-dvh pb-20">
+    <main className="relative min-h-dvh pb-24 md:pb-6">
       <AuroraBackground />
-      <div className="relative z-10 mx-auto max-w-md sm:max-w-lg md:max-w-xl px-4 sm:px-6 pt-10 sm:pt-12">
-        <p className="mb-1 text-sm text-teal-dim">{greeting()}, {userName}</p>
-        <h1 className="mb-6 sm:mb-8 font-serif text-2xl sm:text-3xl text-foreground">
+      <BottomNav />
+
+      <div className="relative z-10 md:pl-[84px] px-5 sm:px-8 md:px-10 pt-10 md:pt-12 max-w-4xl">
+        <p className="mb-1 text-xs font-sans tracking-wide text-teal/70">
+          {greeting()}, {userName}
+        </p>
+        <h1 className="mb-8 font-serif text-2xl sm:text-3xl text-foreground">
           {todaySession?.summary ? "La tua giornata" : "Come ti senti stasera?"}
         </h1>
 
-        {todaySession?.summary && (
-          <>
-            <div className="mb-6 text-center">
-              <MoodScore score={todaySession.mood_score!} size="lg" />
-              <p className="mt-1 text-xs text-muted-foreground">mood di oggi</p>
-              <div className="mt-3 flex justify-center">
-                <MoodPills keywords={todaySession.mood_keywords} />
+        {todaySession?.summary && colors && (
+          <div className="relative overflow-hidden rounded-[20px] border border-white/[0.11] bg-gradient-to-br from-white/[0.08] via-white/[0.025] to-violet/[0.04] p-5 backdrop-blur-xl shadow-[0_6px_24px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.10)] glass-shimmer mb-8">
+            <div className="flex items-center gap-4 mb-4">
+              <div className={`flex items-center gap-2.5 rounded-full border px-3 py-1.5 ${colors.badge}`}>
+                <div className={`h-2 w-2 rounded-full ${colors.dot} shadow-[0_0_6px_currentColor]`} />
+                <span className={`text-2xl font-light leading-none ${colors.num}`}>
+                  {todaySession.mood_score}
+                </span>
+                <span className={`text-[10px] uppercase tracking-[2px] ${colors.num} opacity-60`}>mood</span>
               </div>
+              <MoodPills keywords={todaySession.mood_keywords} />
             </div>
-            <div className="mb-8 rounded-2xl border border-card-border bg-card p-4 sm:p-5">
-              <p className="font-serif text-sm leading-relaxed text-muted">{todaySession.summary}</p>
-            </div>
-          </>
+            <p className="font-serif text-sm leading-relaxed text-white/50 italic">
+              {todaySession.summary}
+            </p>
+          </div>
         )}
 
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center gap-3 pt-2">
+          {!todaySession?.summary && (
+            <p className="font-serif text-base text-white/55 italic mb-2">Raccontami della tua giornata</p>
+          )}
+          {todaySession?.summary && (
+            <p className="font-serif text-sm text-white/40 italic mb-1">Vuoi aggiungere qualcosa?</p>
+          )}
           <VoiceRecorder isRecording={false} isLoading={starting} onStart={handleStartSession} onStop={() => {}} />
         </div>
       </div>
-      <BottomNav />
     </main>
   );
 }
