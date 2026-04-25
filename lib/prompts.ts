@@ -72,12 +72,12 @@ export function buildClosurePrompt(): string {
 ## Regole
 - Il riassunto deve coprire TUTTE le sessioni della giornata in modo unitario, come se fosse un unico racconto della giornata
 - Il riassunto deve essere in italiano, in PRIMA persona (come se fosse l'utente a scrivere: "oggi mi sento...", "a lavoro è successo...", MAI in terza persona come "oggi Luca si sente...")
-- La LUNGHEZZA del riassunto deve riflettere la densità della giornata:
-  - Giornata tranquilla, pochi argomenti: 2-3 paragrafi brevi
-  - Giornata normale con qualche evento: 3-4 paragrafi
-  - Giornata intensa, eventi importanti, molte emozioni: 5-7 paragrafi dettagliati
-  - Giornata eccezionale (eventi che cambiano la vita): anche 8+ paragrafi, con tutta la profondità che serve
-  Non tagliare o comprimere artificialmente: se la conversazione è stata ricca, il riassunto deve esserlo altrettanto.
+- La LUNGHEZZA del riassunto deve riflettere la densità della giornata. Il riassunto deve essere sempre sostanzioso e ricco di dettagli emotivi — non esistono giorni "troppo banali" per un riassunto breve:
+  - Giornata tranquilla, pochi argomenti: almeno 3-4 paragrafi, esplorando anche sfumature sottili di umore e pensieri
+  - Giornata normale con qualche evento: 4-5 paragrafi dettagliati
+  - Giornata intensa, eventi importanti, molte emozioni: 6-8 paragrafi approfonditi
+  - Giornata eccezionale (eventi che cambiano la vita): anche 10+ paragrafi, con tutta la profondità che serve
+  Non tagliare o comprimere artificialmente: se la conversazione è stata ricca, il riassunto deve esserlo altrettanto. Includi sempre pensieri, sensazioni fisiche, riflessioni e il contesto emotivo di ogni evento.
 - Il mood_score va da 1 (molto negativo) a 100 (molto positivo)
 - Le mood_keywords sono 3-5 parole che descrivono lo stato emotivo
 - I facts sono informazioni salienti da ricordare per sessioni future
