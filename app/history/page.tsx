@@ -72,7 +72,7 @@ export default function HistoryPage() {
                   {/* Dot + date */}
                   <div className="relative z-10 flex w-10 flex-shrink-0 flex-col items-center gap-1 pt-1.5">
                     <div className={`h-2.5 w-2.5 rounded-full border ${meta.dot}`} />
-                    <span className="text-center text-[8px] leading-tight text-white/22">
+                    <span className="text-center text-[8px] md:text-[11px] leading-tight text-white/40 md:text-white/50">
                       {day}<br />{month}
                     </span>
                   </div>
@@ -80,18 +80,18 @@ export default function HistoryPage() {
                   {/* Card */}
                   <div className="relative flex-1 overflow-hidden rounded-[15px] border border-white/[0.11] bg-gradient-to-br from-white/[0.07] via-white/[0.025] to-violet/[0.04] px-4 py-3 backdrop-blur-xl shadow-[0_6px_24px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.10)] transition-all duration-200 group-hover:border-white/[0.18] glass-shimmer">
                     <div className="mb-2 flex items-center justify-between">
-                      <span className="text-[10px] font-sans font-medium tracking-wide text-white/35 capitalize">
+                      <span className="text-[10px] md:text-sm font-sans font-medium tracking-wide text-white/35 md:text-white/50 capitalize">
                         {dayLabel(s.date)}
                       </span>
                       {s.mood_score && (
                         <div className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 ${meta.badge}`}>
                           <div className={`h-1.5 w-1.5 rounded-full ${meta.dot}`} />
-                          <span className={`text-sm font-medium leading-none ${meta.num}`}>{s.mood_score}</span>
+                          <span className={`text-sm md:text-base font-medium leading-none ${meta.num}`}>{s.mood_score}</span>
                         </div>
                       )}
                     </div>
                     {s.summary && (
-                      <p className="mb-2.5 line-clamp-2 font-serif text-[11px] leading-relaxed text-white/42 italic">
+                      <p className="mb-2.5 line-clamp-2 md:line-clamp-3 font-serif text-[11px] md:text-sm leading-relaxed text-white/42 md:text-white/60 italic">
                         {s.summary}
                       </p>
                     )}
@@ -101,7 +101,7 @@ export default function HistoryPage() {
                           const isPos = ["sereno","felice","grato","motivato","sollevato","energico","contento","fiducioso"].some(p => kw.toLowerCase().includes(p));
                           const isNeg = ["ansioso","triste","stanco","frustrato","arrabbiato","preoccupato","stressato"].some(n => kw.toLowerCase().includes(n));
                           return (
-                            <span key={kw} className={`rounded-full border px-2 py-0.5 text-[9px] ${
+                            <span key={kw} className={`rounded-full border px-2 py-0.5 text-[9px] md:text-xs ${
                               isPos ? "bg-teal/[0.10] border-teal/[0.20] text-teal/85"
                               : isNeg ? "bg-pink/[0.10] border-pink/[0.20] text-pink-light/85"
                               : "bg-violet/[0.10] border-violet/[0.20] text-violet-light/85"
