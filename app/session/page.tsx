@@ -104,8 +104,7 @@ export default function SessionPage() {
     <main className="relative flex min-h-dvh flex-col">
       <AuroraBackground />
 
-      {/* Sidebar nav (desktop only — no bottom pill during session) */}
-      <BottomNav />
+      <BottomNav hideMobile />
 
       <div className="relative z-10 flex flex-col flex-1 w-full md:max-w-[75vw] md:mx-auto">
         {/* Top bar */}
@@ -160,7 +159,7 @@ export default function SessionPage() {
         </div>
 
         {/* Mic area — centered, voice-first */}
-        <div className="flex-shrink-0 flex justify-center pb-10 pt-4 px-5">
+        <div className="flex-shrink-0 flex justify-center pb-16 pt-4 px-5">
           <VoiceRecorder isRecording={isRecording} onStart={startRecording} onStop={handleStopRecording} />
         </div>
       </div>

@@ -15,7 +15,7 @@ const logo = (
   <img src="/favicon.ico" alt="Jurnal" className="mb-5 h-8 w-8 rounded-[10px] object-cover shadow-[0_4px_12px_rgba(120,80,220,0.28)]" />
 );
 
-export function BottomNav() {
+export function BottomNav({ hideMobile }: { hideMobile?: boolean }) {
   const pathname = usePathname();
 
   return (
@@ -41,8 +41,8 @@ export function BottomNav() {
         })}
       </nav>
 
-      {/* Mobile: floating bottom pill */}
-      <nav className="md:hidden fixed bottom-4 left-1/2 z-50 -translate-x-1/2 flex items-center gap-0.5 rounded-full border border-white/[0.12] bg-white/[0.05] px-1.5 py-1.5 backdrop-blur-[48px] shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.12),0_0_0_0.5px_rgba(255,255,255,0.05)]">
+      {/* Mobile: floating bottom pill — hidden when hideMobile is true (e.g. during active session) */}
+      {!hideMobile && <nav className="md:hidden fixed bottom-4 left-1/2 z-50 -translate-x-1/2 flex items-center gap-0.5 rounded-full border border-white/[0.12] bg-white/[0.05] px-1.5 py-1.5 backdrop-blur-[48px] shadow-[0_8px_32px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.12),0_0_0_0.5px_rgba(255,255,255,0.05)]">
         {tabs.map((tab) => {
           const isActive = pathname === tab.href || (tab.href !== "/" && pathname.startsWith(tab.href));
           return (
@@ -60,7 +60,7 @@ export function BottomNav() {
             </Link>
           );
         })}
-      </nav>
+      </nav>}
     </>
   );
 }
