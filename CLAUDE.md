@@ -30,15 +30,16 @@ AI-powered daily journaling web app focused on mental wellness. Users record tho
 - **Repo:** `jurnal-org/artifact`
 - **URL:** `https://github.com/jurnal-org/artifact`
 - **Default branch:** `main`
-- **GitHub account:** `ch3do` (authenticated via `gh` CLI)
+- **Collaborators:** `ch3do` (Francesco), `giacomolancerin` (Giacomo)
+- **Note:** `gh` CLI auth varia per macchina; entrambi hanno accesso al repo
 
 ## Vercel Deployment
 
 - **Team:** `ch3dos-projects`
 - **Project:** `jurnal`
-- **Production URL:** `https://jurnal-wheat.vercel.app`
+- **Production URL:** `https://your-jurnal.vercel.app`
 - **Auto-deploy:** connected to `jurnal-org/artifact` repo, deploys on push to `main`
-- **CLI auth:** `vercel` CLI authenticated as `ch3do`
+- **CLI auth:** `vercel` CLI authenticated per macchina (`ch3do` o `giacomolancerin`)
 
 ## Google Cloud
 
@@ -48,7 +49,7 @@ AI-powered daily journaling web app focused on mental wellness. Users record tho
 - **OAuth consent screen:** External, In Production
 - **Redirect URIs:**
   - `http://localhost:3000/api/auth/callback/google` (dev)
-  - `https://jurnal-wheat.vercel.app/api/auth/callback/google` (prod)
+  - `https://your-jurnal.vercel.app/api/auth/callback/google` (prod)
 - **Gemini API:** via Google AI Studio key in `GOOGLE_AI_API_KEY`
 
 ## Project Structure
@@ -122,6 +123,32 @@ hooks/
 - **Palette:** Violet rgb(120,80,220) -> Teal rgb(60,180,160) gradient, Pink rgb(200,100,150) for negative
 - **Cards:** rgba(255,255,255,0.03) bg, rgba(255,255,255,0.06) border
 
+## Skills e plugin — quando usarli
+
+La maggioranza dei task (e.g. bug fix, modifiche UI semplici, aggiunta di campi/stringhe) si risolve direttamente. Ogni skill ha un costo in token — usarla senza motivo valido è spreco.
+
+### Riferimento rapido
+
+| Plugin / Skill | Quando usarlo | Mai usarlo per |
+|---|---|---|
+| `context7` | API di libreria che potrebbe essere cambiata (Next.js, Supabase, Framer Motion, Recharts, next-intl, shadcn/ui) | Concetti generali TypeScript/React che non dipendono da versione |
+| `superpowers:requesting-code-review` | **Obbligatorio** prima di aprire ogni PR | — |
+| `superpowers:brainstorming` | Feature nuova con requisiti ambigui, decisione architetturale con tradeoff reali | Bug fix, task con scope chiaro, piccole modifiche UI |
+| `superpowers:writing-plans` | Task multi-step con 3+ componenti interdipendenti e ordine non ovvio | Task lineari anche se lunghi |
+| `superpowers:systematic-debugging` | Bug non riproducibile, causa non chiara dopo prima analisi | Bug con causa ovvia |
+| `superpowers:verification-before-completion` | Prima di dichiarare "fatto" su task complessi (build + type check + test) | Task banali già verificati inline |
+| `frontend-design` | Costruire una nuova pagina o componente UI da zero, dove la qualità visiva è il deliverable principale | Modificare componenti semplici, già con riferimenti |
+| `feature-dev` | Feature grande e autonoma che richiede analisi del codebase + blueprint architetturale | Feature piccola o con spec già chiara |
+| `code-review:code-review` | Review esplicita di una PR su richiesta dell'utente | Review automatica a fine ogni task |
+| `claude-md-management` | Solo se l'utente chiede esplicitamente di aggiornare CLAUDE.md | Mai in autonomia |
+
+---
+
+## Git Workflow
+
+- Ogni modifica va su un branch dedicato, mai direttamente su `main`. Usa **Conventional Branch** naming (es. `feat/voice-recorder`, `fix/session-close-api`).
+- Ogni cambiamento logicamente distinto va in un commit separato. Usa **Conventional Commits** (es. `feat(session): add voice input`, `fix(api): handle null session id`).
+
 ## Commands
 
 ```bash
@@ -136,7 +163,7 @@ All in `.env.local` (not committed). Also set on Vercel for production:
 
 - `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` — Google OAuth
 - `NEXTAUTH_SECRET` — NextAuth session encryption
-- `NEXTAUTH_URL` — `http://localhost:3000` (dev), `https://jurnal-wheat.vercel.app` (prod)
+- `NEXTAUTH_URL` — `http://localhost:3000` (dev), `https://your-jurnal.vercel.app` (prod)
 - `DATABASE_URL` — Neon pooled connection string
 - `GOOGLE_AI_API_KEY` — Gemini API (chat + embeddings)
 - `GOOGLE_CLOUD_PROJECT_ID` / `GOOGLE_CLOUD_STT_API_KEY` — (reserved for Chirp 3 upgrade)
