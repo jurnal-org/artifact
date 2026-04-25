@@ -58,9 +58,9 @@ export default function SessionDetailPage() {
         {/* Back */}
         <button
           onClick={() => router.push("/history")}
-          className="mb-6 flex items-center gap-1.5 text-[11px] font-sans text-white/30 transition-colors hover:text-white/55"
+          className="mb-7 flex items-center gap-2 rounded-full border border-white/[0.14] bg-white/[0.05] px-4 py-2 text-sm font-sans text-white/60 backdrop-blur-sm transition-all hover:bg-white/[0.09] hover:text-white/85 hover:border-white/[0.24]"
         >
-          <ArrowLeft className="h-3.5 w-3.5" />
+          <ArrowLeft className="h-4 w-4" />
           Storico
         </button>
 
