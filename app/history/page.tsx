@@ -70,9 +70,9 @@ export default function HistoryPage() {
                   className="group flex gap-5 pb-3 text-left"
                 >
                   {/* Dot + date */}
-                  <div className="relative z-10 flex w-10 flex-shrink-0 flex-col items-center gap-1 pt-1.5">
+                  <div className="relative z-10 flex w-10 flex-shrink-0 flex-col items-center justify-center gap-1.5">
                     <div className={`h-2.5 w-2.5 rounded-full border ${meta.dot}`} />
-                    <span className="text-center text-[8px] md:text-[11px] leading-tight text-white/40 md:text-white/50">
+                    <span className="text-center text-[8px] md:text-sm leading-tight text-white/40 md:text-white/55">
                       {day}<br />{month}
                     </span>
                   </div>
