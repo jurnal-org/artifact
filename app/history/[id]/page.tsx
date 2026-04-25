@@ -21,6 +21,7 @@ export default function SessionDetailPage() {
   const params = useParams();
   const [session, setSession] = useState<Session | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
     if (status === "unauthenticated") { router.push("/login"); return; }
@@ -101,15 +102,27 @@ export default function SessionDetailPage() {
           </div>
         )}
 
-        {/* Transcript */}
+        {/* Chat toggle */}
         {messages.length > 0 && (
-          <div className="relative overflow-hidden rounded-[18px] border border-white/[0.11] bg-gradient-to-br from-white/[0.07] via-white/[0.025] to-violet/[0.04] px-5 py-4 backdrop-blur-xl shadow-[0_6px_24px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.10)] glass-shimmer">
-            <p className="text-[9px] font-sans uppercase tracking-[2px] text-white/25 mb-4">Conversazione</p>
-            <div className="flex flex-col">
-              {messages.map((msg) => (
-                <ChatBubble key={msg.id} role={msg.role} content={msg.content} />
-              ))}
-            </div>
+          <div>
+            <button
+              onClick={() => setShowChat((v) => !v)}
+              className="mb-4 flex items-center gap-2 rounded-full border border-white/[0.14] bg-white/[0.05] px-5 py-2 text-sm font-sans text-white/55 backdrop-blur-sm transition-all hover:bg-white/[0.09] hover:text-white/80 hover:border-white/[0.22]"
+            >
+              <span className="text-base leading-none">{showChat ? "↑" : "↓"}</span>
+              {showChat ? "Nascondi chat" : "Esplora chat"}
+            </button>
+
+            {showChat && (
+              <div className="relative overflow-hidden rounded-[18px] border border-white/[0.11] bg-gradient-to-br from-white/[0.07] via-white/[0.025] to-violet/[0.04] px-5 py-4 backdrop-blur-xl shadow-[0_6px_24px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.10)] glass-shimmer">
+                <p className="text-[9px] font-sans uppercase tracking-[2px] text-white/25 mb-4">Conversazione</p>
+                <div className="flex flex-col">
+                  {messages.map((msg) => (
+                    <ChatBubble key={msg.id} role={msg.role} content={msg.content} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
