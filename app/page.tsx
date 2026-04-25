@@ -77,7 +77,7 @@ export default function Home() {
       </div>
 
       {/* Mic + hint — centered in remaining space */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center w-full max-w-xl mx-auto px-5 sm:px-8 text-center">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center w-full max-w-xl mx-auto px-5 sm:px-8 text-center md:pb-[25vh]">
         {todaySession?.summary && colors && (
           <div className="relative overflow-hidden rounded-[20px] border border-white/[0.11] bg-gradient-to-br from-white/[0.08] via-white/[0.025] to-violet/[0.04] p-5 backdrop-blur-xl shadow-[0_6px_24px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.10)] glass-shimmer mb-8 text-left w-full">
             <div className="flex items-center gap-4 mb-4">
