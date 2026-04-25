@@ -41,9 +41,11 @@ export default function SessionDetailPage() {
     );
   }
 
-  const formattedDate = new Date(session.date).toLocaleDateString("it-IT", {
-    weekday: "long", day: "numeric", month: "long", year: "numeric",
-  });
+  const d = new Date(session.date);
+  const weekday = d.toLocaleDateString("it-IT", { weekday: "long" });
+  const day = d.getDate();
+  const month = d.toLocaleDateString("it-IT", { month: "long" });
+  const formattedDate = `${weekday.charAt(0).toUpperCase() + weekday.slice(1)}, ${day} ${month.charAt(0).toUpperCase() + month.slice(1)}`;
 
   const meta = session.mood_score ? moodMeta(session.mood_score) : null;
 
@@ -63,8 +65,7 @@ export default function SessionDetailPage() {
         </button>
 
         {/* Header */}
-        <p className="mb-1 text-xs font-sans text-white/32 capitalize">{formattedDate}</p>
-        <h1 className="mb-5 font-serif text-2xl sm:text-3xl text-foreground">La tua giornata</h1>
+        <h1 className="mb-5 font-serif text-2xl sm:text-3xl text-foreground">{formattedDate}</h1>
 
         {/* Score + pills */}
         {meta && session.mood_score && (
