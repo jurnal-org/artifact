@@ -62,20 +62,24 @@ export default function Home() {
   const colors = todaySession?.mood_score ? moodColor(todaySession.mood_score) : null;
 
   return (
-    <main className="relative min-h-dvh flex flex-col items-center justify-center pb-24 md:pb-6">
+    <main className="relative min-h-dvh flex flex-col pb-24 md:pb-6">
       <AuroraBackground />
       <BottomNav />
 
-      <div className="relative z-10 w-full max-w-xl px-5 sm:px-8 text-center">
-        <p className="mb-1.5 text-xs font-sans tracking-wide text-teal/70">
+      {/* Greeting + title — upper portion */}
+      <div className="relative z-10 pt-[14vh] w-full max-w-xl mx-auto px-5 sm:px-8 text-center">
+        <p className="mb-2 text-sm font-sans tracking-wide text-teal/70">
           {greeting()}, {userName}
         </p>
-        <h1 className="mb-8 font-serif text-3xl sm:text-4xl text-foreground">
+        <h1 className="font-serif text-3xl sm:text-4xl text-foreground">
           {todaySession?.summary ? "La tua giornata" : "Come ti senti?"}
         </h1>
+      </div>
 
+      {/* Mic + hint — centered in remaining space */}
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center w-full max-w-xl mx-auto px-5 sm:px-8 text-center">
         {todaySession?.summary && colors && (
-          <div className="relative overflow-hidden rounded-[20px] border border-white/[0.11] bg-gradient-to-br from-white/[0.08] via-white/[0.025] to-violet/[0.04] p-5 backdrop-blur-xl shadow-[0_6px_24px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.10)] glass-shimmer mb-8 text-left">
+          <div className="relative overflow-hidden rounded-[20px] border border-white/[0.11] bg-gradient-to-br from-white/[0.08] via-white/[0.025] to-violet/[0.04] p-5 backdrop-blur-xl shadow-[0_6px_24px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.10)] glass-shimmer mb-8 text-left w-full">
             <div className="flex items-center gap-4 mb-4">
               <div className={`flex items-center gap-2.5 rounded-full border px-3 py-1.5 ${colors.badge}`}>
                 <div className={`h-2 w-2 rounded-full ${colors.dot} shadow-[0_0_6px_currentColor]`} />
@@ -92,14 +96,14 @@ export default function Home() {
           </div>
         )}
 
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-5">
           {!todaySession?.summary && (
-            <p className="font-serif text-base text-white/45 italic">Raccontami della tua giornata</p>
+            <p className="font-serif text-lg text-white/45 italic">Raccontami della tua giornata</p>
           )}
           {todaySession?.summary && (
-            <p className="font-serif text-sm text-white/40 italic">Vuoi aggiungere qualcosa?</p>
+            <p className="font-serif text-base text-white/40 italic">Vuoi aggiungere qualcosa?</p>
           )}
-          <VoiceRecorder isRecording={false} isLoading={starting} onStart={handleStartSession} onStop={() => {}} />
+          <VoiceRecorder isRecording={false} isLoading={starting} onStart={handleStartSession} onStop={() => {}} large />
         </div>
       </div>
     </main>

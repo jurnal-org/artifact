@@ -7,23 +7,30 @@ interface VoiceRecorderProps {
   isLoading?: boolean;
   onStart: () => void;
   onStop: () => void;
+  large?: boolean;
 }
 
-export function VoiceRecorder({ isRecording, isLoading, onStart, onStop }: VoiceRecorderProps) {
+export function VoiceRecorder({ isRecording, isLoading, onStart, onStop, large }: VoiceRecorderProps) {
+  const sz = large ? 88 : 72;
+  const ripple1 = large ? "-14px" : "-10px";
+  const ripple2 = large ? "-28px" : "-22px";
+  const iconSz = large ? 30 : 26;
+
   return (
-    <div className="relative flex h-[72px] w-[72px] items-center justify-center">
+    <div className="relative flex items-center justify-center" style={{ height: sz, width: sz }}>
       {/* Ripple rings — only when idle/ready */}
       {!isRecording && !isLoading && (
         <>
-          <span className="absolute inset-[-10px] rounded-full bg-violet/[0.12] animate-mic-ripple" />
-          <span className="absolute inset-[-22px] rounded-full bg-violet/[0.06] animate-mic-ripple-delay" />
+          <span className="absolute rounded-full bg-violet/[0.12] animate-mic-ripple" style={{ inset: ripple1 }} />
+          <span className="absolute rounded-full bg-violet/[0.06] animate-mic-ripple-delay" style={{ inset: ripple2 }} />
         </>
       )}
 
       <button
         onClick={isRecording ? onStop : onStart}
         disabled={isLoading}
-        className={`relative z-10 flex h-[72px] w-[72px] items-center justify-center rounded-full border-[1.5px] transition-all duration-200 active:scale-95 cursor-pointer ${
+        style={{ height: sz, width: sz }}
+        className={`relative z-10 flex items-center justify-center rounded-full border-[1.5px] transition-all duration-200 active:scale-95 cursor-pointer ${
           isLoading
             ? "border-white/[0.14] bg-gradient-to-br from-violet/40 to-teal/25 opacity-70"
             : isRecording
@@ -36,7 +43,7 @@ export function VoiceRecorder({ isRecording, isLoading, onStart, onStop }: Voice
         ) : isRecording ? (
           <Square className="h-5 w-5 fill-pink text-pink" />
         ) : (
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          <svg width={iconSz} height={iconSz} viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
             <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
             <line x1="12" y1="19" x2="12" y2="23"/>
