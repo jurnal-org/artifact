@@ -24,6 +24,15 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Jurnal",
   description: "Il tuo diario personale con AI companion",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: "Jurnal",
+    statusBarStyle: "black-translucent",
+  },
+  icons: {
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
