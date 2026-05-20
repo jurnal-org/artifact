@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/jurnal-org/artifact/compare/v1.0.0...v1.1.0) (2026-05-20)
+
+
+### Features
+
+* **pwa:** iOS home screen icon and web app manifest ([#4](https://github.com/jurnal-org/artifact/issues/4)) ([09041e1](https://github.com/jurnal-org/artifact/commit/09041e174101da8bf495c7fe9bc9eaceb34088d2)), closes [#0a0a0a](https://github.com/jurnal-org/artifact/issues/0a0a0a)
+
 # 1.0.0 (2026-04-25)
 
 
